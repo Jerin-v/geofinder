@@ -3,6 +3,8 @@ import './App.css'
 
 function App() {
   const [countries, setCountries] = useState(null)
+  const [search, setSearch] = useState("")
+  const [filtered, setFiltered] = useState(null)
 
   useEffect(() => {
     const fetchCountryData = async () => {
@@ -20,6 +22,17 @@ function App() {
 
 
   //filter function
+  //take an input to filter by 
+  //filter out all data from country list 
+  //return filtered data
+  const filteredCountries = (filterValue, property) => {
+    const filteredData = countries.filter(item => 
+      item[property]
+        .toLowerCase()
+        .includes(filterValue.toLowerCase())
+    )
+    setFiltered(filteredData)
+  }
 
   return (
     <div>
