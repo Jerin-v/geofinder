@@ -21,7 +21,7 @@ function App() {
   const searchItems = searchValue => {
     setSearch(searchValue)
     if(searchValue !== "") {
-      filteredCountries(searchValue.toLowerCase(), 'name.common')
+      filteredCountries(searchValue.toLowerCase(), 'cca2')
     } else {
       setFiltered(countries)
     }
@@ -47,6 +47,7 @@ function App() {
       <input
         type='text'
         placeholder='Search...'
+        onChange={(input) => searchItems(input.target.value)}
       />
       <div className='listBox'>
         {
@@ -54,7 +55,8 @@ function App() {
           //move to another component if it gets too big
         }
         <ul>
-          {countries && countries.map(country => 
+          {search.length > 0 ?
+          (filtered.map(country => 
             <li key={country.cca2}>
               <img src={country.flags.png} />
               {country.name.common}
@@ -62,8 +64,18 @@ function App() {
               {country.region}
 
             </li>
+          )) :
+          countries && (countries.map(country => 
+            <li key={country.cca2}>
+              <img src={country.flags.png} />
+              {country.name.common}
+              {country.population}
+              {country.region}
+            </li>
+          ))
+          
 
-          )}
+          }
         </ul>
       </div>
 
