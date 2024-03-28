@@ -18,7 +18,14 @@ function App() {
   },[])
 
   //search bar function
-
+  const searchItems = searchValue => {
+    setSearch(searchValue)
+    if(searchValue !== "") {
+      filteredCountries(searchValue.toLowerCase(), 'name.common')
+    } else {
+      setFiltered(countries)
+    }
+  }
 
 
   //filter function
