@@ -15,6 +15,12 @@ function App() {
     fetchCountryData()
   },[])
 
+  //search bar function
+
+
+
+  //filter function
+
   return (
     <div>
       <h1>Geo Finder</h1>
@@ -22,15 +28,24 @@ function App() {
         type='text'
         placeholder='Search...'
       />
-      <ul>
-        {countries && countries.map(country => 
-          <li key={country.cca2}>
-            <img src={country.flags.png} />
-            {country.name.common}
-          </li>
+      <div className='listBox'>
+        {
+          //change list into table format
+          //move to another component if it gets too big
+        }
+        <ul>
+          {countries && countries.map(country => 
+            <li key={country.cca2}>
+              <img src={country.flags.png} />
+              {country.name.common}
+              {country.population}
+              {country.region}
 
-        )}
-      </ul>
+            </li>
+
+          )}
+        </ul>
+      </div>
 
     </div>
   )
