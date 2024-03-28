@@ -21,7 +21,12 @@ function App() {
   const searchItems = searchValue => {
     setSearch(searchValue)
     if(searchValue !== "") {
-      filteredCountries(searchValue.toLowerCase(), 'cca2')
+      const filteredData = countries.filter(item => 
+        item.name.common
+          .toLowerCase()
+          .includes(searchValue.toLowerCase())
+      )
+      setFiltered(filteredData)
     } else {
       setFiltered(countries)
     }
@@ -32,7 +37,7 @@ function App() {
   //take an input to filter by 
   //filter out all data from country list 
   //return filtered data
-  const filteredCountries = (filterValue, property) => {
+  const filteredCountries = (filterValue, property,) => {
     const filteredData = countries.filter(item => 
       item[property]
         .toLowerCase()
