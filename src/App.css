@@ -41,9 +41,6 @@
   color: #888;
 }
 
-li {
-  list-style: none;
-}
 
 .summaryStats {
   display: flex;
@@ -59,11 +56,29 @@ li {
 }
 
 .listBox {
-  border: 1px solid white;
+ 
   border-radius: 5px;
   margin: 10px;
 }
 
 input {
   border: 1px solid green;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+th, td {
+  border: 1px solid white;
+  padding: 8px;
+  text-align: left;
+  margin: 20px 0;
+}
+
+img {
+  width: 50%;
+  height: auto;
 }
