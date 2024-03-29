@@ -2,11 +2,13 @@ import { useState, useEffect} from 'react'
 import './App.css'
 
 function App() {
-  const [countries, setCountries] = useState(null)
+  const [countries, setCountries] = useState([])
   const [search, setSearch] = useState("")
   const [filtered, setFiltered] = useState(null)
-  const [value, setValue] = useState("")
+  const [value, setValue] = useState("All")
   const regions = Array.from(new Set(countries.map(country => country.region)))
+
+
   useEffect(() => {
     const fetchCountryData = async () => {
       const response = await fetch("https://restcountries.com/v3.1/all")
@@ -88,7 +90,8 @@ function App() {
       <label>
         Region:
         <select value={value} onChange={handleChange}>
-          {regions.map(region => 
+          <option key="All" value="All">All</option>
+          {regions.map(region =>
             <option key={region} value={region}>{region}</option>
           )}
         </select>
