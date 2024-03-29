@@ -77,29 +77,38 @@ function App() {
         onChange={(input) => searchItems(input.target.value)}
       />
       <div className='listBox'>
-        <ul>
-          {search.length > 0 ?
-          (filtered.map(country => 
-            <li key={country.cca2}>
-              <img src={country.flags.png} />
-              {country.name.common}
-              {country.population}
-              {country.region}
+        <table>
+          <thead>
+            <tr>
+              <th>Flag</th>
+              <th>Name</th>
+              <th>Population</th>
+              <th>Region</th>
+            </tr>
+          </thead>
+          <tbody>
+            {search.length > 0 ?
+            (filtered.map(country => 
+              <tr key={country.cca2}>
+                <td><img src={country.flags.png} /></td>
+                <td>{country.name.common}</td>
+                <td>{country.population}</td>
+                <td>{country.region}</td>
+              </tr>
+            )) :
+            countries && (countries.map(country => 
+              <tr key={country.cca2}>
+                <td><img src={country.flags.png} /></td>
+                <td>{country.name.common}</td>
+                <td>{country.population}</td>
+                <td>{country.region}</td>
+              </tr>
+            ))
+            
 
-            </li>
-          )) :
-          countries && (countries.map(country => 
-            <li key={country.cca2}>
-              <img src={country.flags.png} />
-              {country.name.common}
-              {country.population}
-              {country.region}
-            </li>
-          ))
-          
-
-          }
-        </ul>
+            }
+          </tbody>
+        </table>
       </div>
 
     </div>
