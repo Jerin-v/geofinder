@@ -5,6 +5,7 @@ function App() {
   const [countries, setCountries] = useState(null)
   const [search, setSearch] = useState("")
   const [filtered, setFiltered] = useState(null)
+  const [value, setValue] = useState("all")
 
   useEffect(() => {
     const fetchCountryData = async () => {
@@ -18,17 +19,18 @@ function App() {
   },[])
 
   //search bar function
-  const searchItems = searchValue => {
+  
+  const searchItems = searchValue => { 
     setSearch(searchValue)
-    if(searchValue !== "") {
+    if(searchValue !== "") {  // and dropdown filter is empty
       const filteredData = countries.filter(item => 
         item.name.common
           .toLowerCase()
           .includes(searchValue.toLowerCase())
       )
       setFiltered(filteredData)
-    } else {
-      setFiltered(countries)
+    } else { // else if search value AND dropdown filter full, filteredData filters through dropdown filter
+      setFiltered(countries) // else if both are empty return full country array
     }
   }
 
@@ -46,11 +48,15 @@ function App() {
     setFiltered(filteredData)
   }
 
+  const handleChange = (e) => {
+    setValue(e.target.value)
+  }
+
   //To do 
   //add summary statistics containers [x]
   //summary statistics avg pop, # of landlocked countries, common language [x]
   //add filter buttons pop(slider?), continent, region, 
-  //convert list to table format
+  //convert list to table format [x]
   //add sidebar
 
   return (
@@ -76,6 +82,18 @@ function App() {
         placeholder='Search...'
         onChange={(input) => searchItems(input.target.value)}
       />
+
+      <label>
+        Region:
+        <select value={value} onChange={handleChange}>
+          {countries.map(country => 
+            <option value={country.region}>{country.region}</option>
+          )
+          }
+        </select>
+
+      </label>
+      
       <div className='listBox'>
         <table>
           <thead>
