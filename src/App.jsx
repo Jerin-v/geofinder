@@ -6,6 +6,7 @@ function App() {
   const [search, setSearch] = useState("")
   const [filtered, setFiltered] = useState(null)
   const [value, setValue] = useState("All")
+  const [region, setRegion] = useState(null)
   const regions = Array.from(new Set(countries.map(country => country.region)))
 
 
@@ -24,35 +25,44 @@ function App() {
   
   const searchItems = searchValue => { 
     setSearch(searchValue)
-    if(searchValue !== "") {  // and dropdown filter is empty
+    if(searchValue !== "" && value === "All") {  // and dropdown filter is empty
       const filteredData = countries.filter(item => 
         item.name.common
           .toLowerCase()
           .includes(searchValue.toLowerCase())
       )
       setFiltered(filteredData)
-    } else { // else if search value AND dropdown filter full, filteredData filters through dropdown filter
-      setFiltered(countries) // else if both are empty return full country array
+    } else if(searchValue !== "" && value !== "All")  { // else if search value AND dropdown filter full, filteredData filters through dropdown filter
+       const filteredRegions = region.filter(item => 
+          item.name.common 
+            .toLowerCase()
+            .includes(searchValue.toLowerCase())
+        )
+        setFiltered(filteredRegions)
+    } else {
+      setFiltered(countries)
     }
   }
 
 
   //filter function
-  //take an input to filter by 
-  //filter out all data from country list 
-  //return filtered data
-  const filteredCountries = (filterValue, property,) => {
+ //takes region value and returns filtered list
+  const filteredRegions = (filterValue) => {
     const filteredData = countries.filter(item => 
-      item[property]
+      item.region
         .toLowerCase()
         .includes(filterValue.toLowerCase())
     )
-    setFiltered(filteredData)
+    setRegion(filteredData)
   }
 
   const handleChange = (e) => {
     setValue(e.target.value)
+    filteredRegions(e.target.value)
+
   }
+
+  
 
 
 
@@ -109,25 +119,32 @@ function App() {
             </tr>
           </thead>
           <tbody>
-            {search.length > 0 ?
-            (filtered.map(country => 
-              <tr key={country.cca2}>
-                <td><img src={country.flags.png} /></td>
-                <td>{country.name.common}</td>
-                <td>{country.population}</td>
-                <td>{country.region}</td>
-              </tr>
-            )) :
-            countries && (countries.map(country => 
-              <tr key={country.cca2}>
-                <td><img src={country.flags.png} /></td>
-                <td>{country.name.common}</td>
-                <td>{country.population}</td>
-                <td>{country.region}</td>
-              </tr>
-            ))
-            
-
+            {search.length === 0 && value === "All" ?
+              countries && (countries.map(country => 
+                <tr key={country.cca2}>
+                  <td><img src={country.flags.png} /></td>
+                  <td>{country.name.common}</td>
+                  <td>{country.population}</td>
+                  <td>{country.region}</td>
+                </tr>
+              )) : 
+              search.length === 0 && value !== "All" ?
+                (region.map(country => 
+                <tr key={country.cca2}>
+                  <td><img src={country.flags.png} /></td>
+                  <td>{country.name.common}</td>
+                  <td>{country.population}</td>
+                  <td>{country.region}</td>
+                </tr>
+              )) :
+              (filtered.map(country => 
+                <tr key={country.cca2}>
+                  <td><img src={country.flags.png} /></td>
+                  <td>{country.name.common}</td>
+                  <td>{country.population}</td>
+                  <td>{country.region}</td>
+                </tr>
+              ))
             }
           </tbody>
         </table>
