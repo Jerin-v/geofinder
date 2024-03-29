@@ -5,8 +5,8 @@ function App() {
   const [countries, setCountries] = useState(null)
   const [search, setSearch] = useState("")
   const [filtered, setFiltered] = useState(null)
-  const [value, setValue] = useState("all")
-
+  const [value, setValue] = useState("")
+  const regions = Array.from(new Set(countries.map(country => country.region)))
   useEffect(() => {
     const fetchCountryData = async () => {
       const response = await fetch("https://restcountries.com/v3.1/all")
@@ -52,6 +52,8 @@ function App() {
     setValue(e.target.value)
   }
 
+
+
   //To do 
   //add summary statistics containers [x]
   //summary statistics avg pop, # of landlocked countries, common language [x]
@@ -86,10 +88,9 @@ function App() {
       <label>
         Region:
         <select value={value} onChange={handleChange}>
-          {countries.map(country => 
-            <option value={country.region}>{country.region}</option>
-          )
-          }
+          {regions.map(region => 
+            <option key={region} value={region}>{region}</option>
+          )}
         </select>
 
       </label>
