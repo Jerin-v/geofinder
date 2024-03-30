@@ -4,7 +4,7 @@ Submitted by: **Jerin Vandannoor**
 
 This web app: **Search through all the countries in the world!**
 
-Time spent: **4** hours spent in total
+Time spent: **5** hours spent in total
 
 ## Required Features
 
