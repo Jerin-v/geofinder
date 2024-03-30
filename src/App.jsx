@@ -5,7 +5,7 @@ function App() {
   const [countries, setCountries] = useState([])
   const [search, setSearch] = useState("")
   const [filtered, setFiltered] = useState(null)
-  const [value, setValue] = useState("All")
+  const [regionValue, setRegionValue] = useState("All")
   const [region, setRegion] = useState(null)
   const regions = Array.from(new Set(countries.map(country => country.region)))
 
@@ -25,14 +25,14 @@ function App() {
   
   const searchItems = searchValue => { 
     setSearch(searchValue)
-    if(searchValue !== "" && value === "All") {  // and dropdown filter is empty
+    if(searchValue !== "" && regionValue === "All") {  // and dropdown filter is empty
       const filteredData = countries.filter(item => 
         item.name.common
           .toLowerCase()
           .includes(searchValue.toLowerCase())
       )
       setFiltered(filteredData)
-    } else if(searchValue !== "" && value !== "All")  { // else if search value AND dropdown filter full, filteredData filters through dropdown filter
+    } else if(searchValue !== "" && regionValue !== "All")  { // else if search value AND dropdown filter full, filteredData filters through dropdown filter
        const filteredRegions = region.filter(item => 
           item.name.common 
             .toLowerCase()
@@ -57,22 +57,12 @@ function App() {
   }
 
   const handleChange = (e) => {
-    setValue(e.target.value)
+    setRegionValue(e.target.value)
     filteredRegions(e.target.value)
 
   }
 
   
-
-
-
-  //To do 
-  //add summary statistics containers [x]
-  //summary statistics avg pop, # of landlocked countries, common language [x]
-  //add filter buttons pop(slider?), continent, region, 
-  //convert list to table format [x]
-  //add sidebar
-
   return (
     <div className='wholePage'>
       <h1>Geo Finder</h1>
@@ -99,7 +89,7 @@ function App() {
 
       <label>
         Region:
-        <select value={value} onChange={handleChange}>
+        <select value={regionValue} onChange={handleChange}>
           <option key="All" value="All">All</option>
           {regions.map(region =>
             <option key={region} value={region}>{region}</option>
@@ -119,7 +109,7 @@ function App() {
             </tr>
           </thead>
           <tbody>
-            {search.length === 0 && value === "All" ?
+            {search.length === 0 && regionValue === "All" ?
               countries && (countries.map(country => 
                 <tr key={country.cca2}>
                   <td><img src={country.flags.png} /></td>
@@ -128,7 +118,7 @@ function App() {
                   <td>{country.region}</td>
                 </tr>
               )) : 
-              search.length === 0 && value !== "All" ?
+              search.length === 0 && regionValue !== "All" ?
                 (region.map(country => 
                 <tr key={country.cca2}>
                   <td><img src={country.flags.png} /></td>
