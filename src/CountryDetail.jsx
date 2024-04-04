@@ -7,7 +7,7 @@ const CountryDetail = () => {
 
     useEffect(() => {
         const fetchCountryDetails = async () => {
-            const details = await fetch(`https://restcountries.com/v3.1/name/${params.name}`);
+            const details = await fetch(`https://restcountries.com/v3.1/alpha/${params.code}`);
             const detailsJson = await details.json();
             setCountryDetails(detailsJson[0]);
         }
@@ -21,7 +21,7 @@ const CountryDetail = () => {
             <img
                 className="images"
                 src={countryDetails && countryDetails.flags.png}
-                alt={`flag for ${params.name}`}
+                alt={`flag for ${params.code}`}
             />
             <h3>{ countryDetails && countryDetails.capital[0] }</h3>
 
@@ -30,4 +30,4 @@ const CountryDetail = () => {
     
 }
 
-export default CountryDetail()
+export default CountryDetail;
