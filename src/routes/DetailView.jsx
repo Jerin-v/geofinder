@@ -1,9 +1,10 @@
+import CountryDetail from "../CountryDetail"
 
 
 const DetailView = () => {
     return (
         <div>
-            <h1>DetailView</h1>
+            <CountryDetail />
         </div>
     )
 }
