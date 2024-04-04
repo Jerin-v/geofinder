@@ -14,6 +14,19 @@ const CountryDetail = () => {
         fetchCountryDetails().catch(console.error);
 
     }, [params.name]);
+
+    return (
+        <div>
+            <h1>{countryDetails && countryDetails.name.common}</h1>
+            <img
+                className="images"
+                src={countryDetails && countryDetails.flags.png}
+                alt={`flag for ${params.name}`}
+            />
+            <h3>{ countryDetails && countryDetails.capital[0] }</h3>
+
+        </div>
+    )
     
 }
 
