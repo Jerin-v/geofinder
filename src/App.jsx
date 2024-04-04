@@ -67,7 +67,7 @@ function App() {
     <tr key={country.cca2}>
       <td><img src={country.flags.png} alt={country.name.common} /></td>
       <td>
-        <Link to={`/countryDetails/${country.cca3}`} style={{color: 'white'}}>
+        <Link to={`/countryDetails/${country.cca3}`} style={{color: 'white', textDecoration: 'underline'}}>
           {country.name.common}
         </Link>
       </td>
