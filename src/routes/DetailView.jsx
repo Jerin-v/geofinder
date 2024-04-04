@@ -8,3 +8,5 @@ const DetailView = () => {
         </div>
     )
 }
+
+export default DetailView;
