@@ -89,4 +89,12 @@ nav {
   right: 5px;
 }
 
+.home-link 
+{
+  list-style: none;
+  border:1px solid white;
+  background:#1d1f1d;
+  width:75px;
+}
+
 
