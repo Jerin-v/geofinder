@@ -62,7 +62,15 @@ function App() {
 
   }
 
-  
+  const renderCountryRow = (country) => (
+    <tr key={country.cca2}>
+      <td><img src={country.flags.png} alt={country.name.common} /></td>
+      <td>{country.name.common}</td>
+      <td>{country.population}</td>
+      <td>{country.region}</td>
+    </tr>
+  );
+
   return (
     <div className='wholePage'>
       <h1>Geo Finder</h1>
@@ -110,31 +118,10 @@ function App() {
           </thead>
           <tbody>
             {search.length === 0 && regionValue === "All" ?
-              countries && (countries.map(country => 
-                <tr key={country.cca2}>
-                  <td><img src={country.flags.png} /></td>
-                  <td>{country.name.common}</td>
-                  <td>{country.population}</td>
-                  <td>{country.region}</td>
-                </tr>
-              )) : 
+              countries && countries.map(renderCountryRow) : 
               search.length === 0 && regionValue !== "All" ?
-                (region.map(country => 
-                <tr key={country.cca2}>
-                  <td><img src={country.flags.png} /></td>
-                  <td>{country.name.common}</td>
-                  <td>{country.population}</td>
-                  <td>{country.region}</td>
-                </tr>
-              )) :
-              (filtered.map(country => 
-                <tr key={country.cca2}>
-                  <td><img src={country.flags.png} /></td>
-                  <td>{country.name.common}</td>
-                  <td>{country.population}</td>
-                  <td>{country.region}</td>
-                </tr>
-              ))
+                region.map(renderCountryRow) :
+                filtered.map(renderCountryRow)
             }
           </tbody>
         </table>
