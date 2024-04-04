@@ -1,5 +1,6 @@
 import { useState, useEffect} from 'react'
 import './App.css'
+import { Link } from 'react-router-dom'
 
 function App() {
   const [countries, setCountries] = useState([])
@@ -65,7 +66,11 @@ function App() {
   const renderCountryRow = (country) => (
     <tr key={country.cca2}>
       <td><img src={country.flags.png} alt={country.name.common} /></td>
-      <td>{country.name.common}</td>
+      <td>
+        <Link to={`/countryDetails/${country.cca3}`} style={{color: 'white'}}>
+          {country.name.common}
+        </Link>
+      </td>
       <td>{country.population}</td>
       <td>{country.region}</td>
     </tr>
